@@ -1,0 +1,9 @@
+# 项目排除路径
+/cloud-common/target/
+/cloud-gateway/target/
+/cloud-goods-web/target/
+/cloud-item/cloud-item-interface/target/
+/cloud-item/cloud-item-service/target/
+/cloud-registry/target/
+/cloud-search/target/
+/cloud-upload/target/

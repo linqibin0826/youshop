@@ -1,0 +1,15 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: cloud-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    registry-fetch-interval-seconds: 5  # 拉取服务
+zuul:
+  prefix: /api
+  routes:
+    cloud-item-service: /item/**        # /api/item 路由到商品模块
+    cloud-search: /search/**            # /api/search 路由到搜索模块

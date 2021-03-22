@@ -9,6 +9,12 @@ spring:
       cluster-nodes: 192.168.142.128:9300
   jackson:
     default-property-inclusion: non_null
+  rabbitmq:
+    host: 192.168.142.128
+    username: youshop
+    password: youshop
+    virtual-host: youshop
+
 eureka:
   client:
     service-url:

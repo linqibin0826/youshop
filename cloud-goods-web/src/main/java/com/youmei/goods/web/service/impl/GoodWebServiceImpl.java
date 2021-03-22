@@ -5,6 +5,7 @@ import com.youmei.goods.web.client.CategoryClient;
 import com.youmei.goods.web.client.GoodsClient;
 import com.youmei.goods.web.client.SpecificationClient;
 import com.youmei.goods.web.service.GoodsWebService;
+import com.youmei.goods.web.util.ThreadUtils;
 import com.youmei.item.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class GoodWebServiceImpl implements GoodsWebService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GoodsWebService.class);
 
-
+    @Override
     public void createHTML(Long spuId) {
         PrintWriter printWriter = null;
         try {
@@ -48,7 +49,7 @@ public class GoodWebServiceImpl implements GoodsWebService {
             // 将数据放入上下文
             thymeLeafContext.setVariables(data);
             // 创建文件,输出
-            File file = new File("F:\\Java\\nginx-1.14.0\\html\\item" + spuId + ".html");
+            File file = new File("H:\\nginx-1.14.0\\html\\item\\" + spuId + ".html");
             printWriter = new PrintWriter(file);
 
             // 执行页面静态化
@@ -61,6 +62,22 @@ public class GoodWebServiceImpl implements GoodsWebService {
             }
         }
     }
+
+    /**
+     * 新建线程处理页面静态化
+     * @param spuId
+     */
+    @Override
+    public void asyncExecute(Long spuId) {
+        ThreadUtils.execute(()->createHTML(spuId));
+        /*ThreadUtils.execute(new Runnable() {
+            @Override
+            public void run() {
+                createHtml(spuId);
+            }
+        });*/
+    }
+
 
 
 
@@ -107,5 +124,11 @@ public class GoodWebServiceImpl implements GoodsWebService {
         data.put("spuDetail", spuDetail);
 
         return data;
+    }
+
+    @Override
+    public void deleteHtml(Long spuId) {
+        File file = new File("H:\\nginx-1.14.0\\html\\item\\" + spuId + ".html");
+        file.deleteOnExit();
     }
 }

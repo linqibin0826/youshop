@@ -12,11 +12,16 @@ import com.youmei.item.pojo.Stock;
 import com.youmei.item.service.CategoryService;
 import com.youmei.item.service.GoodsService;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.persistence.Id;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +29,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     private SpuMapper spuMapper;
@@ -42,6 +50,8 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private StockMapper stockMapper;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsServiceImpl.class);
 
     @Override
     public PageResult<SpuBo> queryGoodsInfoByPage(String key, Boolean saleable, Integer page, Integer rows) {
@@ -83,6 +93,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    @Transactional
     public void saveGoods(SpuBo spuBo) {
         // 1.将spu基本信息保存至tb_spu
         spuBo.setId(null);
@@ -97,11 +108,9 @@ public class GoodsServiceImpl implements GoodsService {
         spuDetail.setSpuId(spuBo.getId());
         spuDetailMapper.insertSelective(spuDetail);
 
-
-
         addSkuAndStock(spuBo);
 
-
+        sendMessage(spuBo.getId(), "insert");
     }
 
     private void addSkuAndStock(SpuBo spuBo) {
@@ -125,6 +134,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    @Transactional
     public void updateGoods(SpuBo spuBo) {
 
         // 1.将原有的sku信息删除
@@ -154,6 +164,8 @@ public class GoodsServiceImpl implements GoodsService {
 
         // 4.更新spuDetail表
         this.spuDetailMapper.updateByPrimaryKeySelective(spuBo.getSpuDetail());
+
+        this.sendMessage(spuId, "update");
     }
 
     @Override
@@ -177,5 +189,19 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Spu querySpuById(Long id) {
         return this.spuMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Sku querySkuById(Long id) {
+        return this.skuMapper.selectByPrimaryKey(id);
+    }
+
+    private void sendMessage(Long spuId, String type) {
+        // 发送消息到队列
+        try {
+            this.rabbitTemplate.convertAndSend("item." + type, spuId);
+        } catch (Exception e) {
+            LOGGER.error("{}商品消息发送异常, 商品id: {}", type, spuId, e);
+        }
     }
 }

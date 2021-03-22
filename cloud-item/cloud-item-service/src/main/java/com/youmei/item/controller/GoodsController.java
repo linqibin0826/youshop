@@ -57,7 +57,6 @@ public class GoodsController {
     }
 
 
-
     @GetMapping("/sku/list")
     public ResponseEntity<List<Sku>> querySkuListById(@RequestParam("id") Long spuId) {
         List<Sku> skuList = this.goodsService.querySkuListBySpuId(spuId);
@@ -74,5 +73,14 @@ public class GoodsController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(spu);
+    }
+
+    @GetMapping("/sku/{id}")
+    public ResponseEntity<Sku> querySkuById(@PathVariable("id") Long id) {
+        Sku sku = this.goodsService.querySkuById(id);
+        if (sku != null) {
+            return ResponseEntity.ok(sku);
+        }
+        return ResponseEntity.badRequest().build();
     }
 }

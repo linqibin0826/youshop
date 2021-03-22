@@ -71,4 +71,6 @@ public interface GoodsService {
      * @since 2021 /3/1 16:25
      */
     Spu querySpuById(Long id);
+
+    Sku querySkuById(Long id);
 }

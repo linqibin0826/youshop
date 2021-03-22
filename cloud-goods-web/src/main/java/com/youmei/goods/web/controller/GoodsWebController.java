@@ -27,6 +27,9 @@ public class GoodsWebController {
     public String toItemPage(Model model, @PathVariable("id")Long id){
         Map<String, Object> data = this.goodsWebService.loadData(id);
         model.addAllAttributes(data);
+
+        // 创建静态页面
+        this.goodsWebService.asyncExecute(id);
         return "item";
     }
 }

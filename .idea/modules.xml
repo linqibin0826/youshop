@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/youshop.iml" filepath="$PROJECT_DIR$/.idea/youshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-auth/cloud-auth-service/cloud-auth-service.iml" filepath="$PROJECT_DIR$/cloud-auth/cloud-auth-service/cloud-auth-service.iml" />
     </modules>
   </component>
 </project>

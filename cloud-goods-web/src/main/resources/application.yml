@@ -5,6 +5,11 @@ spring:
     name: cloud-goods-web
   thymeleaf:
     cache: false
+  rabbitmq:
+    virtual-host: youshop
+    host: 192.168.142.128
+    username: youshop
+    password: youshop
 eureka:
   client:
     service-url:

@@ -17,6 +17,10 @@
         <module>cloud-upload</module>
         <module>cloud-search</module>
         <module>cloud-goods-web</module>
+        <module>cloud-user</module>
+        <module>cloud-sms</module>
+        <module>cloud-auth</module>
+        <module>cloud-carts</module>
     </modules>
 
     <parent>

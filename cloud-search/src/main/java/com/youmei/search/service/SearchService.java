@@ -29,4 +29,22 @@ public interface SearchService {
      * @since 2021 /2/26 11:44
      */
     PageResult<Goods> search(SearchRequest searchRequest);
+
+    /**
+     * Create index.
+     *
+     * @param spuId the spu id
+     * @author youmei
+     * @since 2021 /3/5 21:16
+     */
+    void createIndex(Long spuId) throws IOException;
+
+    /**
+     * Delete index.
+     *
+     * @param spuId the spu id
+     * @author youmei
+     * @since 2021 /3/5 21:22
+     */
+    void deleteIndex(Long spuId);
 }

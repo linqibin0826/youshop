@@ -2,19 +2,26 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="cloud-auth-service" />
         <module name="leyou-good-web" />
+        <module name="cloud-user-interface" />
         <module name="cloud-item-interface" />
-        <module name="cloud-search" />
         <module name="cloud-upload" />
+        <module name="cloud-sms" />
+        <module name="cloud-carts" />
+        <module name="cloud-item-service" />
+        <module name="cloud-gateway" />
+        <module name="cloud-search" />
+        <module name="cloud-user-service" />
+        <module name="cloud-auth-common" />
         <module name="cloud-registry" />
         <module name="cloud-common" />
-        <module name="cloud-item-service" />
         <module name="cloud-goods-web" />
-        <module name="cloud-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,6 +30,10 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloud-auth" options="-parameters" />
+      <module name="cloud-auth-common" options="-parameters" />
+      <module name="cloud-auth-service" options="-parameters" />
+      <module name="cloud-carts" options="-parameters" />
       <module name="cloud-common" options="-parameters" />
       <module name="cloud-gateway" options="-parameters" />
       <module name="cloud-goods-web" options="-parameters" />
@@ -31,7 +42,11 @@
       <module name="cloud-item-service" options="-parameters" />
       <module name="cloud-registry" options="-parameters" />
       <module name="cloud-search" options="-parameters" />
+      <module name="cloud-sms" options="-parameters" />
       <module name="cloud-upload" options="-parameters" />
+      <module name="cloud-user" options="-parameters" />
+      <module name="cloud-user-interface" options="-parameters" />
+      <module name="cloud-user-service" options="-parameters" />
       <module name="leyou-good-web" options="-parameters" />
       <module name="youshop" options="-parameters" />
     </option>

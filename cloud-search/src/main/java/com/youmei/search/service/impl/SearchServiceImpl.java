@@ -173,6 +173,20 @@ public class SearchServiceImpl implements SearchService {
 
     }
 
+    @Override
+    public void createIndex(Long spuId) throws IOException {
+        Spu spu = this.goodsClient.querySpuById(spuId);
+        Goods goods = this.buildGoods(spu);
+
+        this.goodsRepository.save(goods);
+    }
+
+    @Override
+    public void deleteIndex(Long spuId) {
+        this.goodsRepository.deleteById(spuId);
+    }
+
+
     /**
      * 带上过滤条件的查询器.
      *

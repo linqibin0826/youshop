@@ -1,0 +1,17 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: cloud-sms-service
+  rabbitmq:
+    host: 192.168.142.128
+    username: youshop
+    password: youshop
+    virtual-host: youshop
+    port: 5672
+youshop:
+  sms:
+    accessKeyId: JWffwFJIwada
+    accessKeySecret: aySRliswq8fe7rF9gQyy1Izz4MQ
+    signName: youshop
+    verifyCodeTemplate: SMS_133976814

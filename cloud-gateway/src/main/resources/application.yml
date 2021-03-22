@@ -13,3 +13,20 @@ zuul:
   routes:
     cloud-item-service: /item/**        # /api/item 路由到商品模块
     cloud-search: /search/**            # /api/search 路由到搜索模块
+    cloud-user-service: /user/**        # /api/user 路由到用户服务
+    cloud-auth-service: /auth/**              # 授权中心微服务
+    cloud-carts-service: /carts/**
+  sensitive-headers:                # 放行敏感信息Cookie Authorization等
+  add-host-header: true                 # 添加host信息, 这样才能成功设置cookie
+youshop:
+  jwt:
+    pubKeyPath:  H:\\rsa\\rsa.pub # 公钥地址
+    cookieName: youshop_token # cookie的名称
+  filter:
+    allowPaths:
+      - /api/auth
+      - /api/search
+      - /api/user/register
+      - /api/user/check
+      - /api/user/code
+      - /api/item

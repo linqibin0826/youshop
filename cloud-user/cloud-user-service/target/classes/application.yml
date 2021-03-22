@@ -1,0 +1,29 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: cloud-user-service
+  datasource:
+    url: jdbc:mysql:///youshop
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 192.168.142.128
+    password: root
+  rabbitmq:
+    virtual-host: youshop
+    username: youshop
+    password: youshop
+    host: 192.168.142.128
+    port: 5672
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+
+mybatis:
+  type-aliases-package: com.youshop.user.pojo

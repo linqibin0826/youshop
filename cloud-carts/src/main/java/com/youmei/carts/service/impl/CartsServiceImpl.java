@@ -7,9 +7,11 @@ import com.youmei.carts.pojo.SkuInCarts;
 import com.youmei.carts.service.CartsService;
 import com.youmei.common.utils.JsonUtils;
 import com.youmei.item.pojo.Sku;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -69,4 +71,24 @@ public class CartsServiceImpl implements CartsService {
         });
         return skuInCartsArrayList;
     }
+
+    @Override
+    public void addNums(SkuInCarts skuInCarts) {
+        String userId = LoginInterceptor.getUserInfo().getId().toString();
+        BoundHashOperations<String, Object, Object> hashOps = redisTemplate.boundHashOps(userId);
+        String skuId = skuInCarts.getSkuId().toString();
+        String jsonString = hashOps.get(skuId).toString();
+        SkuInCarts parsedJson = JsonUtils.parse(jsonString, SkuInCarts.class);
+        parsedJson.setNum(skuInCarts.getNum());
+        hashOps.put(skuId, JsonUtils.serialize(parsedJson));
+    }
+
+    @Override
+    public void deleteSkuList(List<Long> skuIds) {
+        String userId = LoginInterceptor.getUserInfo().getId().toString();
+        BoundHashOperations<String, Object, Object> hashOps = redisTemplate.boundHashOps(CART_PREFIX + userId);
+        hashOps.delete(skuIds);
+    }
+
+
 }

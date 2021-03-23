@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-goods-web/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-auth/cloud-auth-service/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-order/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

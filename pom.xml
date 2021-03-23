@@ -21,6 +21,7 @@
         <module>cloud-sms</module>
         <module>cloud-auth</module>
         <module>cloud-carts</module>
+        <module>cloud-order</module>
     </modules>
 
     <parent>

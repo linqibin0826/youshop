@@ -21,6 +21,7 @@
         <module name="cloud-auth-common" />
         <module name="cloud-registry" />
         <module name="cloud-common" />
+        <module name="cloud-order" />
         <module name="cloud-goods-web" />
       </profile>
     </annotationProcessing>
@@ -40,6 +41,7 @@
       <module name="cloud-item" options="-parameters" />
       <module name="cloud-item-interface" options="-parameters" />
       <module name="cloud-item-service" options="-parameters" />
+      <module name="cloud-order" options="-parameters" />
       <module name="cloud-registry" options="-parameters" />
       <module name="cloud-search" options="-parameters" />
       <module name="cloud-sms" options="-parameters" />
